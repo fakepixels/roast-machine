@@ -1,10 +1,9 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Coins, ArrowDown } from "lucide-react"
-import WalletWrapper from './WalletButton'
 import { useAccount } from 'wagmi'
 import { Footer } from './Footer'  // Make sure this import is present
 import { DM_Sans } from 'next/font/google'
@@ -17,6 +16,7 @@ export function WalletRoasterSkeuomorphic() {
   const [isVending, setIsVending] = useState(false)
   const [coinInserted, setCoinInserted] = useState(false)
   const { address } = useAccount()
+  const [roastCount, setRoastCount] = useState(0)
 
   useEffect(() => {
     if (address) {
@@ -34,7 +34,7 @@ export function WalletRoasterSkeuomorphic() {
     setCoinInserted(true)
   }
 
-  const handleVend = async () => {
+  const handleVend = useCallback(async () => {
     setIsVending(true)
     setRoast('')
 
@@ -72,6 +72,7 @@ export function WalletRoasterSkeuomorphic() {
 
       const roastData = await roastResponse.json();
       setRoast(roastData.roast);
+      setRoastCount(prevCount => prevCount + 1);  // Increment roast count
     } catch (error) {
       console.error('Error during vending process:', error);
       setRoast('Oops! The roast machine broke. Try again later!');
@@ -79,7 +80,7 @@ export function WalletRoasterSkeuomorphic() {
       setIsVending(false);
       setCoinInserted(false);
     }
-  }
+  }, [walletAddress])
 
   const handleReset = () => {
     setWalletAddress('')
@@ -93,7 +94,6 @@ export function WalletRoasterSkeuomorphic() {
     <div className="min-h-screen bg-gray-100 flex flex-col justify-between">
       <div className="flex-grow flex items-center justify-center p-4 relative">
         <div className="absolute top-4 right-4">
-          <WalletWrapper />
         </div>
         <div className="w-full max-w-md bg-gradient-to-b from-gray-300 to-gray-400 rounded-xl shadow-2xl overflow-hidden border-4 border-[#10378a]">
           <div className={`${dmSans.className} bg-gradient-to-r from-[#0052FF] to-[#5388fc] p-4 text-white text-center font-bold text-xl sm:text-2xl shadow-md border-b-4 border-[#10378a]`}>
@@ -122,7 +122,7 @@ export function WalletRoasterSkeuomorphic() {
                     <Coins className="w-8 h-8 sm:w-10 sm:h-10 text-yellow-600" />
                   </Button>
                 </div>
-                <ArrowDown className="w-5 h-5 sm:w-6 sm:h-6 text-gray-700 absolute -bottom-6 left-1/2 transform -translate-x-1/2" />
+                
               </div>
               <div className="w-4 sm:w-8"></div>
               <div className="flex space-x-2 sm:space-x-4">
@@ -163,6 +163,9 @@ export function WalletRoasterSkeuomorphic() {
         </div>
       </div>
       <Footer />
+      <div className={`${dmSans.className} text-center p-4 text-lg text-gray-700`}>
+        Number of roasts: {roastCount}
+      </div>
     </div>
   )
 }

@@ -4,7 +4,6 @@ import "./globals.css";
 import OnchainProvider from '../components/OnchainProvider';
 import '@coinbase/onchainkit/styles.css';
 
-
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
