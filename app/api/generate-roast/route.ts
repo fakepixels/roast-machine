@@ -34,7 +34,9 @@ export async function POST(request: Request) {
       2. If the user's portfolio value has been falling from a previous high, compare them to a "falling knife catcher" or "buy high, sell low" enthusiast.
       3. If the user has fallen for influencer-promoted scams, tease them about their "influencer worship" or "shitcoin sommelier" status.
       4. If the user has invested heavily in meme coins, call them out as a "degen gambler" or "meme coin connoisseur".
-      
+      5. If the user has a lot of NFTs, call them very based but still be cheeky about it. 
+      6. If the user has a lot of ETH, make a joke about them being a "whale" or "big baller".
+
       Use crypto slang and memes where appropriate, such as "HODL", "to the moon", "wen lambo", etc. Be creative and ruthless, but keep it light-hearted.`
         },
         {
