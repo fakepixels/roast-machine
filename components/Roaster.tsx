@@ -7,6 +7,9 @@ import { Coins, ArrowDown } from "lucide-react"
 import WalletWrapper from './WalletButton'
 import { useAccount } from 'wagmi'
 import { Footer } from './Footer'  // Make sure this import is present
+import { DM_Sans } from 'next/font/google'
+
+const dmSans = DM_Sans({ subsets: ['latin'] })
 
 export function WalletRoasterSkeuomorphic() {
   const [walletAddress, setWalletAddress] = useState('')
@@ -53,7 +56,7 @@ export function WalletRoasterSkeuomorphic() {
 
       const historyData = await historyResponse.json();
 
-      // Step 2 & 3: Send to Claude and get roast
+      // Step 2 & 3: Send to ChatGPT and get roast
       const roastResponse = await fetch('/api/generate-roast', {
         method: 'POST',
         headers: {
@@ -93,7 +96,7 @@ export function WalletRoasterSkeuomorphic() {
           <WalletWrapper />
         </div>
         <div className="w-full max-w-md bg-gradient-to-b from-gray-300 to-gray-400 rounded-xl shadow-2xl overflow-hidden border-4 border-[#10378a]">
-          <div className="bg-gradient-to-r from-[#0052FF] to-[#5388fc] p-4 text-white text-center font-bold text-2xl shadow-md border-b-4 border-[#10378a]">
+          <div className={`${dmSans.className} bg-gradient-to-r from-[#0052FF] to-[#5388fc] p-4 text-white text-center font-bold text-2xl shadow-md border-b-4 border-[#10378a]`}>
             Wallet Roaster
           </div>
           <div className="p-6 space-y-6">

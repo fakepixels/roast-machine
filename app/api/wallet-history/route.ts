@@ -1,8 +1,16 @@
 import { NextResponse } from 'next/server';
 
-const RPC_ENDPOINT = 'https://api.developer.coinbase.com/rpc/v1/base/h30rRxwzpdcFgqYN5LMYjYiBqDukMpQA';
+const RPC_ENDPOINT = process.env.COINBASE_RPC_ENDPOINT;
+
+if (!RPC_ENDPOINT) {
+  throw new Error('COINBASE_RPC_ENDPOINT is not defined in the environment variables');
+}
 
 export async function POST(request: Request) {
+  if (!RPC_ENDPOINT) {
+    return NextResponse.json({ error: 'RPC endpoint not configured' }, { status: 500 });
+  }
+
   try {
     const { address } = await request.json();
 

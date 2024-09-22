@@ -17,6 +17,8 @@
     "@tanstack/react-query": "^5.56.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "connectkit": "^1.8.2",
+    "framer-motion": "^11.5.6",
     "lucide-react": "^0.441.0",
     "next": "14.2.12",
     "openai": "^4.63.0",
@@ -25,7 +27,7 @@
     "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7",
     "viem": "^2.17.11",
-    "wagmi": "^2.12.12"
+    "wagmi": "^2.12.13"
   },
   "devDependencies": {
     "@types/node": "^20",
